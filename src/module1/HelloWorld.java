@@ -72,7 +72,7 @@ public class HelloWorld extends PApplet
 		map2= new UnfoldingMap(this,250, 250, 350, 500,provider);
 		*/
 		map1 = new UnfoldingMap(this, 50, 50, 200, 300, provider);
-		map2 = new UnfoldingMap(this,250, 50, 200, 300, provider);
+		map2 = new UnfoldingMap(this,300, 50, 300, 300, provider);
 
 		// The next line zooms in and centers the map at 
 	    // 32.9 (latitude) and -117.2 (longitude)
@@ -80,7 +80,8 @@ public class HelloWorld extends PApplet
 		map2.zoomAndPanTo(zoomLevel,new Location(42.9f, -78.8f));
 		// This line makes the map interactive
 		//MapUtils.createDefaultEventDispatcher(this, map1);
-		MapUtils.createDefaultEventDispatcher(this,map1, map2);
+		MapUtils.createDefaultEventDispatcher(this,map1);
+		MapUtils.createDefaultEventDispatcher(this,map2);
 		// TODO: Add code here that creates map2 
 		// Then you'll modify draw() below
 
@@ -90,7 +91,7 @@ public class HelloWorld extends PApplet
 	public void draw() {
 		// So far we only draw map1...
 		// TODO: Add code so that both maps are displayed
-		//map2.draw();
+		map2.draw();
 	map1.draw();
 	}
 
