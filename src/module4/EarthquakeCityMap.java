@@ -77,7 +77,7 @@ public class EarthquakeCityMap extends PApplet {
 		// FOR TESTING: Set earthquakesURL to be one of the testing files by uncommenting
 		// one of the lines below.  This will work whether you are online or offline
 		//earthquakesURL = "test1.atom";
-		//earthquakesURL = "test2.atom";
+		earthquakesURL = "test2.atom";
 		
 		// WHEN TAKING THIS QUIZ: Uncomment the next line
 		//earthquakesURL = "quiz1.atom";
@@ -87,7 +87,6 @@ public class EarthquakeCityMap extends PApplet {
 	    //     STEP 1: load country features and markers
 		List<Feature> countries = GeoJSONReader.loadData(this, countryFile);
 		countryMarkers = MapUtils.createSimpleMarkers(countries);
-		
 		//     STEP 2: read in city data
 		List<Feature> cities = GeoJSONReader.loadData(this, cityFile);
 		cityMarkers = new ArrayList<Marker>();
@@ -111,7 +110,7 @@ public class EarthquakeCityMap extends PApplet {
 	    }
 
 	    // could be used for debugging
-	    printQuakes();
+	    printQuakes(earthquakes);
 	 		
 	    // (3) Add markers to map
 	    //     NOTE: Country markers are not added to the map.  They are used
@@ -121,13 +120,13 @@ public class EarthquakeCityMap extends PApplet {
 	    
 	}  // End setup
 	
-	
+/*	
 	public void draw() {
 		background(0);
 		map.draw();
 		addKey();
 		
-	}
+	}*/
 	
 	// helper method to draw key in GUI
 	// TODO: Update this method as appropriate
@@ -162,6 +161,12 @@ public class EarthquakeCityMap extends PApplet {
 	// set this "country" property already.  Otherwise it returns false.
 	private boolean isLand(PointFeature earthquake) {
 		
+			for(Marker m : countryMarkers){
+				
+			if(	isInCountry(earthquake, m)) return true;
+			
+				
+		}
 		// IMPLEMENT THIS: loop over all countries to check if location is in any of them
 		
 		// TODO: Implement this method using the helper method isInCountry
@@ -176,8 +181,24 @@ public class EarthquakeCityMap extends PApplet {
 	// the quakes to count how many occurred in that country.
 	// Recall that the country markers have a "name" property, 
 	// And LandQuakeMarkers have a "country" property set.
-	private void printQuakes() 
-	{
+	private void printQuakes(List<PointFeature> earthquakes) 
+	{   
+		String cname="";
+		String name;
+		for(Marker m : countryMarkers){
+			int  i=0;
+			name=m.getProperty("name").toString();
+			for(PointFeature f : earthquakes){
+				if(f.getProperty("country")!=null) cname = f.getProperty("country").toString();{
+				// if(cname!=null && name!=null && cname.equalsIgnoreCase(name)){
+					 if(cname!=null && name!=null && cname.equals(name) && isLand(f)){
+					 i=i+1;
+				 }
+				} 
+			}
+			if(i>0)
+			System.out.println("Country : "+name+" count : "+ i);
+		}
 		// TODO: Implement this method
 	}
 	

@@ -83,11 +83,40 @@ public class EarthquakeCityMap extends PApplet {
 	    	// PointFeatures also have a getLocation method
 	    }
 	    
+	    
+	    
 	    // Here is an example of how to use Processing's color method to generate 
 	    // an int that represents the color yellow.  
 	    int yellow = color(255, 255, 0);
+	    int red= color(255,0,0);
+	    int blue=color(0,0,255);
+	    int r=10;
+	    int col=yellow;
+	    for(PointFeature f : earthquakes){
+	    	Object magObj = f.getProperty("magnitude");
+	    	float mag = Float.parseFloat(magObj.toString());
+	    		if(mag<4){
+	    			r=5;
+	    			col=blue;
+	    		}
+	    		else if (mag>=4 && mag < 4.9){
+	    			r=10;
+	    			col=yellow;
+	    		}
+	    		else if (mag>=4.9){
+	    			r=15;
+	    			col=red;
+	    		}
+	    SimplePointMarker to = createMarker(f);
+	    to.setRadius(r);
+	   
+	    to.setColor(col);
+	    markers.add(to);
 	    
+	    
+	    }
 	    //TODO: Add code here as appropriate
+	    map.addMarkers(markers);
 	}
 		
 	// A suggested helper method that takes in an earthquake feature and 
@@ -101,8 +130,8 @@ public class EarthquakeCityMap extends PApplet {
 	
 	public void draw() {
 	    background(10);
-	    map.draw();
-	    addKey();
+	   map.draw();
+	     addKey();
 	}
 
 
@@ -111,6 +140,23 @@ public class EarthquakeCityMap extends PApplet {
 	private void addKey() 
 	{	
 		// Remember you can use Processing's graphics methods here
-	
+		fill(255,255,224);
+		rect(20,50,150,250,7);
+		fill(255,0,0);
+		ellipse(40,90,15,15);
+		fill(255,255,0);
+		ellipse(40,150,10,10);
+		fill(0,0,255);
+		ellipse(40,210,5,5);
+		textSize(12);
+		fill(0);
+		text("Earthquae key", 45, 70);
+		text("5.0+ Magnitude", 60, 94);
+		text("4.0+ Magnitude", 60, 154);
+		text("Below 4.0",60,214); 
+
+
+
+
 	}
 }

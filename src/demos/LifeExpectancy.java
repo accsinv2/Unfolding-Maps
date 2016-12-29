@@ -66,6 +66,7 @@ public class LifeExpectancy extends PApplet {
 				// Encode value as brightness (values range: 40-90)
 				int colorLevel = (int) map(lifeExp, 40, 90, 10, 255);
 				marker.setColor(color(255-colorLevel, 100, colorLevel));
+				
 			}
 			else {
 				marker.setColor(color(150,150,150));

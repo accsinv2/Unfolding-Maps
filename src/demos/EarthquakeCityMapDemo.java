@@ -26,7 +26,7 @@ import parsing.ParseFeed;
 /** EarthquakeCityMapDemo
  * An application with an interactive map displaying earthquake data.
  * Author: UC San Diego Intermediate Software Development MOOC team
- * @author Vivek Singh
+ * @author Your name here
  * Date: July 17, 2015
  * */
 public class EarthquakeCityMapDemo extends PApplet {
@@ -53,16 +53,15 @@ public class EarthquakeCityMapDemo extends PApplet {
 
 	
 	public void setup() {
-	//	size(950, 600, OPENGL);
-		size(950, 600);
+		size(950, 600, OPENGL);
+
 		// Assume online
-	//	map = new UnfoldingMap(this, 200, 50, 700, 500, new Google.GoogleMapProvider());
-		map = new UnfoldingMap(this, 200, 50, 700, 500, new OpenStreetMap.OpenStreetMapProvider() );
+		map = new UnfoldingMap(this, 200, 50, 700, 500, new Google.GoogleMapProvider());
+//		map = new UnfoldingMap(this, 200, 50, 700, 500, new OpenStreetMap.OpenStreetMapProvider() );
 //	    map = new UnfoldingMap(this, 200, 50, 650, 600, new MBTilesMapProvider(mbTilesString));
 
 	    map.zoomToLevel(1);
 	    MapUtils.createDefaultEventDispatcher(this, map);	
-	    //this implements mouse events click events in the map variable
 			
 	    
 	    /* For demo purposes */
@@ -72,15 +71,9 @@ public class EarthquakeCityMapDemo extends PApplet {
 	    //STAGE 1: Markers (not associated with Features)
 	    
 	    // Create a marker at a specific location in the world, and format it
-	    //datatype variable name = create new object with prototype defined by class Location passing the value through the constructor
-	    Location valLoc = new Location(-38.14f,-73.03f);
-	    //Displays an Interplay between class and the interface that it implements
-	    //here the SimplePointMarker is a class that implements an abstract datatype Marker, which is essentially an interface
-	    //Defining it as an interface means that SimplePointMarker guarantees that it will provide the functionality 
-	    //provided by Marker Interface to its variable valLoc
-	    
- 	    Marker val = new SimplePointMarker(valLoc);  
- 	    map.addMarker(val); 
+//	    Location valLoc = new Location(-38.14f,-73.03f);
+//	    Marker val = new SimplePointMarker(valLoc);
+//	    map.addMarker(val);
 	    
 	    //STAGE 2: Features with rich data, then Marker
 	    
@@ -97,14 +90,8 @@ public class EarthquakeCityMapDemo extends PApplet {
 	   //STAGE 3: List of Features, then list of Markers (ADTs)
 	   // cf. http://earthquake.usgs.gov/earthquakes/world/10_largest_world.php
 	   // Goal: display all earthquakes at or above magnitude 9.0
-	    //new Location(-38.14f,-73.03f) will return a location object which is to be passed to the constructor of PointFeature
- 	    //or val loca could be passed here aswell
- 	    List<Location> pointlocations = new ArrayList<Location>();
- 	   pointlocations.add(new Location(-38.14f,-73.03f));
- 	   
- 	    //My Implementation
- 	  PointFeature valdiviaEq = new PointFeature(pointlocations.get(0));
-	  //  PointFeature valdiviaEq = new PointFeature(new Location(-38.14f,-73.03f));
+	    
+	    PointFeature valdiviaEq = new PointFeature(new Location(-38.14f,-73.03f));
 	    valdiviaEq.addProperty("title", "Valdivia, Chile");
 	    valdiviaEq.addProperty("magnitude", "9.5");
 	    valdiviaEq.addProperty("date", "March 22, 1960");
@@ -136,7 +123,7 @@ public class EarthquakeCityMapDemo extends PApplet {
 	    kamchatkaEq.addProperty("date", "November 4, 1952");
 	    kamchatkaEq.addProperty("year", 1952);
 
-	  //Add all PointFeature to a list so that we can iterate over it  
+	    
 	    List<PointFeature> bigEarthquakes = new ArrayList<PointFeature>();
 	    bigEarthquakes.add(valdiviaEq);
 	    bigEarthquakes.add(alaskaEq);
@@ -147,10 +134,9 @@ public class EarthquakeCityMapDemo extends PApplet {
 	    List<Marker> markers = new ArrayList<Marker>();
 	    for (PointFeature eq: bigEarthquakes) {
 	    	markers.add(new SimplePointMarker(eq.getLocation(), eq.getProperties()));
-	    	// marker can be without or with ppt
-	    	// Example Marker val = new SimplePointMarker(Location)
+	    	
 	    }
-	    map.addMarkers(markers); //we can add single marker or a list of marker aswell 
+	    map.addMarkers(markers);
 //	    
 //	    
 //	    // STAGE 4: format markers on whether "historical" or "recent"
@@ -162,6 +148,9 @@ public class EarthquakeCityMapDemo extends PApplet {
 	    for (Marker mk :markers) {
 	    	if ( (int) mk.getProperty("year") > 2000 ) {
 	    		mk.setColor(yellow);
+	    	
+	   
+	    		
 	    	}
 	    	else {
 	    		mk.setColor(gray);

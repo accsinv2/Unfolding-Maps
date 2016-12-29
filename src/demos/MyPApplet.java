@@ -17,7 +17,7 @@ public class MyPApplet extends PApplet{
 	public void setup() {
 		//Add setup code for MyPApplet
 		size(400,400);				//set canvas size
-		background(255);			//set canvas color
+		background(0);			//set canvas color
 		stroke(0);				//set pen color
 		img = loadImage("palmTrees.jpg", "jpg");
 	}

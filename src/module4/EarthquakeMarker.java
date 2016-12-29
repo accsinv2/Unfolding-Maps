@@ -26,7 +26,8 @@ public abstract class EarthquakeMarker extends SimplePointMarker
   
 	
 	
-	/** Greater than or equal to this threshold is a moderate earthquake */
+	/** Greater tha09-opm6m-*9+iu
+	 * n or equal to this threshold is a moderate earthquake */
 	public static final float THRESHOLD_MODERATE = 5;
 	/** Greater than or equal to this threshold is a light earthquake */
 	public static final float THRESHOLD_LIGHT = 4;
